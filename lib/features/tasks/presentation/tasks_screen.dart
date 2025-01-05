@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/done_tasks/done_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/search_tasks/search_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/todo_tasks/todo_tasks_tab.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -63,8 +63,10 @@ class _TasksScreenState extends State<TasksScreen> {
       valueListenable: currentIndexNotifier,
       builder: (context, currentIndex, child) {
         return Scaffold(
+          backgroundColor: Colors.white,
           body: tabs[currentIndex],
           appBar: AppBar(
+            backgroundColor: Colors.white,
             leadingWidth: 200,
             leading: Row(
               children: [
@@ -73,7 +75,13 @@ class _TasksScreenState extends State<TasksScreen> {
               ],
             ),
             actions: [
-              const Text('John'),
+              Text(
+                'John',
+                style: GoogleFonts.urbanist(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                ),
+              ),
               const SizedBox(width: 14),
               Image.asset(
                 AppAssets.avatar,
@@ -85,26 +93,27 @@ class _TasksScreenState extends State<TasksScreen> {
             ],
           ),
           bottomNavigationBar: Container(
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
                   width: 2,
-                  color: Colors.grey.withOpacity(.1),
+                  color: AppColors.paleWhite,
                 ),
               ),
             ),
             height: 100,
             child: BottomNavigationBar(
+              backgroundColor: Colors.white,
               elevation: 0,
               currentIndex: currentIndex,
               selectedItemColor: AppColors.blue,
               unselectedItemColor: AppColors.mutedAzure,
               type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: const TextStyle(
+              selectedLabelStyle: GoogleFonts.urbanist(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
-              unselectedLabelStyle: const TextStyle(
+              unselectedLabelStyle: GoogleFonts.urbanist(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
