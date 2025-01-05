@@ -13,9 +13,9 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   final ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
 
-  final List<Widget> tabs = [
+  final List<Widget?> tabs = [
     const TodoTasksTab(),
-    Container(),
+    null,
     const SearchTasksTab(),
     const DoneTasksTab(),
   ];
