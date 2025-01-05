@@ -93,7 +93,7 @@ class _TasksScreenState extends State<TasksScreen> {
             ],
           ),
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(
                 top: BorderSide(
                   width: 2,

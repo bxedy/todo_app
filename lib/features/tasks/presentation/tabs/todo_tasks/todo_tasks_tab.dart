@@ -32,7 +32,7 @@ class TodoTasksTab extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             'You\'ve got 7 tasks to do.',
             style: GoogleFonts.urbanist(
@@ -41,7 +41,7 @@ class TodoTasksTab extends StatelessWidget {
               color: AppColors.slateBlue,
             ),
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           Container(
             decoration: BoxDecoration(
               color: AppColors.paleWhite,
@@ -58,7 +58,7 @@ class TodoTasksTab extends StatelessWidget {
                       width: 24,
                       height: 24,
                       child: Checkbox(
-                        side: BorderSide(
+                        side: const BorderSide(
                           color: AppColors.mutedAzure,
                           width: 2,
                         ),
@@ -71,7 +71,7 @@ class TodoTasksTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,7 @@ class TodoTasksTab extends StatelessWidget {
                           color: AppColors.slatePurple,
                         ),
                       ),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Text(
                         'You\'ve got 7 tasks to do.',
                         style: GoogleFonts.urbanist(
