@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_screen.dart';
 
 void main() {
@@ -10,9 +11,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TasksScreen(),
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
+      ),
+      home: const TasksScreen(),
     );
   }
 }
