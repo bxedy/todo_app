@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/done_tasks/done_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/search_tasks/search_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/tabs/todo_tasks/todo_tasks_tab.dart';
@@ -25,37 +26,12 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _onTabTapped(int index) {
     if (index == 1) {
-      _showCreateBottomSheet();
+      CreateTaskBottomSheet.show(context);
     } else {
       currentIndexNotifier.value = index;
     }
   }
 
-  void _showCreateBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const TextField(
-                decoration: InputDecoration(labelText: 'Task Name'),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Add Task'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
