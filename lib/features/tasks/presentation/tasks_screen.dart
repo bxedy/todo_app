@@ -2,45 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
-import 'package:todo_app/features/tasks/presentation/tabs/done_tasks/done_tasks_tab.dart';
-import 'package:todo_app/features/tasks/presentation/tabs/search_tasks/search_tasks_tab.dart';
-import 'package:todo_app/features/tasks/presentation/tabs/todo_tasks/todo_tasks_tab.dart';
+import 'package:todo_app/features/tasks/presentation/components/tabs/done_tasks/done_tasks_tab.dart';
+import 'package:todo_app/features/tasks/presentation/components/tabs/search_tasks/search_tasks_tab.dart';
+import 'package:todo_app/features/tasks/presentation/components/tabs/todo_tasks/todo_tasks_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
 class TasksScreen extends StatefulWidget {
-  const TasksScreen({super.key});
+  final TasksController tasksController;
+
+  const TasksScreen({super.key, required this.tasksController});
 
   @override
   State<TasksScreen> createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  final ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
-
-  final List<Widget?> tabs = [
-    const TodoTasksTab(),
-    null,
-    const SearchTasksTab(),
-    const DoneTasksTab(),
-  ];
+  late final List<Widget?> tabs;
 
   void _onTabTapped(int index) {
     if (index == 1) {
-      CreateTaskBottomSheet.show(context);
+      CreateTaskBottomSheet.show(context, widget.tasksController);
     } else {
-      currentIndexNotifier.value = index;
+      widget.tasksController.updateTab(index);
     }
   }
 
+  @override
+  void initState() {
+    tabs = [
+      TodoTasksTab(widget.tasksController),
+      null,
+      const SearchTasksTab(),
+      const DoneTasksTab(),
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-      valueListenable: currentIndexNotifier,
-      builder: (context, currentIndex, child) {
+    return ListenableBuilder(
+      listenable: widget.tasksController,
+      builder: (context, _) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: tabs[currentIndex],
+          body: tabs[widget.tasksController.selectedTabIndex],
           appBar: AppBar(
             backgroundColor: Colors.white,
             leadingWidth: 200,
@@ -81,7 +87,7 @@ class _TasksScreenState extends State<TasksScreen> {
             child: BottomNavigationBar(
               backgroundColor: Colors.white,
               elevation: 0,
-              currentIndex: currentIndex,
+              currentIndex: widget.tasksController.selectedTabIndex,
               selectedItemColor: AppColors.blue,
               unselectedItemColor: AppColors.mutedAzure,
               type: BottomNavigationBarType.fixed,
@@ -99,7 +105,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AppAssets.todo.svgPictureFromPath(
-                      color: currentIndex == 0
+                      color: widget.tasksController.selectedTabIndex == 0
                           ? AppColors.blue
                           : AppColors.mutedAzure,
                     ),
@@ -119,7 +125,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AppAssets.search.svgPictureFromPath(
-                      color: currentIndex == 2
+                      color: widget.tasksController.selectedTabIndex == 2
                           ? AppColors.blue
                           : AppColors.mutedAzure,
                     ),
@@ -130,7 +136,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AppAssets.checked.svgPictureFromPath(
-                      color: currentIndex == 3
+                      color: widget.tasksController.selectedTabIndex == 3
                           ? AppColors.blue
                           : AppColors.mutedAzure,
                     ),
@@ -147,7 +153,7 @@ class _TasksScreenState extends State<TasksScreen> {
 
   @override
   void dispose() {
-    currentIndexNotifier.dispose();
+    widget.tasksController.dispose();
     super.dispose();
   }
 }
