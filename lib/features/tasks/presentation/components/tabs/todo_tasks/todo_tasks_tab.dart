@@ -24,6 +24,15 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
     super.initState();
   }
 
+  String get taskStatusMessage {
+    final tasksCount = widget.tasksController.tasks.length;
+    return tasksCount == 1
+        ? 'You\'ve got 1 task to do.'
+        : tasksCount == 0
+            ? 'Create tasks to achieve more.'
+            : 'You\'ve got $tasksCount tasks to do.';
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -56,7 +65,7 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'You\'ve got ${widget.tasksController.tasks.length} tasks to do.',
+                  taskStatusMessage,
                   style: GoogleFonts.urbanist(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
