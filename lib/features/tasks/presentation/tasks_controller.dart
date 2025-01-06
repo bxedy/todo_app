@@ -33,6 +33,12 @@ class TasksController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> toggleIsDone(Task task) async {
+    await _tasksUsecase.createOrUpdateTask(task.copyWith(isDone: !task.isDone));
+    await loadTasks();
+    notifyListeners();
+  }
+
   Future<void> deleteTask(String id) async {
     await _tasksUsecase.deleteTask(id);
     await loadTasks();

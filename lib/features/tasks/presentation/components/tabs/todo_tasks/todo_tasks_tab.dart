@@ -68,7 +68,12 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final task = widget.tasksController.tasks[index];
-                    return TaskCard(task: task);
+                    return TaskCard(
+                      task: task,
+                      onChanged: (_) {
+                        widget.tasksController.toggleIsDone(task);
+                      },
+                    );
                   },
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 16);

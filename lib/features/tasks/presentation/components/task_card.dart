@@ -5,8 +5,9 @@ import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
+  final void Function(bool?)? onChanged;
 
-  const TaskCard({super.key, required this.task});
+  const TaskCard({super.key, required this.task, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class TaskCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(7),
                   ),
-                  onChanged: (value) {},
+                  onChanged: onChanged,
                 ),
               ),
             ),

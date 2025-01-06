@@ -28,4 +28,18 @@ class Task {
       description: map['description'],
     );
   }
+  
+  Task copyWith({
+    bool? isDone,
+    String? id,
+    String? title,
+    String? description,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      isDone: isDone ?? this.isDone,
+      title: title ?? this.title,
+      description: description ?? this.description,
+    );
+  }
 }
