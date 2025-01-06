@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/features/tasks/presentation/components/empty_tasks_warning.dart';
 import 'package:todo_app/features/tasks/presentation/components/task_card.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
@@ -17,7 +18,7 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.tasksController.loadTasks();
+      widget.tasksController.loadTasks(isDone: false);
     });
 
     super.initState();
@@ -63,21 +64,30 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                ListView.separated(
-                  itemCount: widget.tasksController.tasks.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final task = widget.tasksController.tasks[index];
-                    return TaskCard(
-                      task: task,
-                      onChanged: (_) {
-                        widget.tasksController.toggleIsDone(task);
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 16);
-                  },
+                Expanded(
+                  flex: 10,
+                  child: widget.tasksController.tasks.isEmpty
+                      ? Center(
+                          child: EmptyTasksWarning(
+                            onButtonTap: () {},
+                          ),
+                        )
+                      : ListView.separated(
+                          itemCount: widget.tasksController.tasks.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final task = widget.tasksController.tasks[index];
+                            return TaskCard(
+                              task: task.copyWith(isDone: true),
+                              onChanged: (_) {
+                                widget.tasksController.toggleIsDone(task);
+                              },
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 16);
+                          },
+                        ),
                 )
               ],
             ),
