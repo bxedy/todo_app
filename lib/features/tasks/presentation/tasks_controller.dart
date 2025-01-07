@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_app/features/tasks/domain/usecases/tasks_usecase.dart';
-import 'package:uuid/uuid.dart';
 
 class TasksController extends ChangeNotifier {
   final TasksUsecase _tasksUsecase;
@@ -12,39 +11,39 @@ class TasksController extends ChangeNotifier {
   bool isLoading = false;
   int selectedTabIndex = 0;
 
-  Future<void> loadTasks() async {
+  Future<void> loadTasks({required bool isDone, String? query}) async {
     isLoading = true;
     notifyListeners();
 
-    tasks = await _tasksUsecase.getTasks();
+    tasks = await _tasksUsecase.getTasks(isDone: isDone, query: query);
     notifyListeners();
   }
 
   Future<void> createTask(String title, String description) async {
-    await _tasksUsecase.createOrUpdateTask(
-      Task(
-        id: const Uuid().v4(),
-        title: title,
-        description: description,
-        isDone: false,
-      ),
-    );
-    await loadTasks();
+    await _tasksUsecase.createTask(title, description);
     notifyListeners();
   }
 
-  Future<void> toggleIsDone(Task task) async {
-    await _tasksUsecase.createOrUpdateTask(task.copyWith(isDone: !task.isDone));
-    await loadTasks();
+  Future<void> updateTaskToDone(Task task) async {
+    await _tasksUsecase.updateTaskToDone(task.copyWith(isDone: true));
     notifyListeners();
   }
 
   Future<void> deleteTask(String id) async {
     await _tasksUsecase.deleteTask(id);
-    await loadTasks();
+    notifyListeners();
+  }
+
+  Future<void> deleteAllDoneTasks() async {
+    await _tasksUsecase.deleteAllDoneTasks();
+  }
+
+  void _setTasksToEmpty() async {
+    tasks = [];
   }
 
   void updateTab(int index) {
+    _setTasksToEmpty();
     selectedTabIndex = index;
     notifyListeners();
   }
