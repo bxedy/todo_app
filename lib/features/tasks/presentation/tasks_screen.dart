@@ -22,7 +22,11 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _onTabTapped(int index) {
     if (index == 1) {
-      CreateTaskBottomSheet.show(context, widget.tasksController);
+      CreateTaskBottomSheet.show(context, widget.tasksController,
+          onTaskCreated: () {
+        Navigator.pop(context);
+        widget.tasksController.loadTasks(isDone: index != 1);
+      });
     } else {
       widget.tasksController.updateTab(index);
     }
