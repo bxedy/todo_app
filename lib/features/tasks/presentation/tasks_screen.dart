@@ -33,8 +33,8 @@ class _TasksScreenState extends State<TasksScreen> {
     tabs = [
       TodoTasksTab(widget.tasksController),
       null,
-      const SearchTasksTab(),
-      const DoneTasksTab(),
+      SearchTasksTab(widget.tasksController),
+      DoneTasksTab(widget.tasksController),
     ];
     super.initState();
   }
