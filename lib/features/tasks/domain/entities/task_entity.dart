@@ -1,10 +1,12 @@
-class TaskEntity {
+import 'package:equatable/equatable.dart';
+
+class TaskEntity extends Equatable {
   final bool isDone;
   final String id;
   final String title;
   final String description;
 
-  TaskEntity({
+  const TaskEntity({
     required this.id,
     required this.isDone,
     required this.title,
@@ -28,7 +30,7 @@ class TaskEntity {
       description: map['description'],
     );
   }
-  
+
   TaskEntity copyWith({
     bool? isDone,
     String? id,
@@ -42,4 +44,7 @@ class TaskEntity {
       description: description ?? this.description,
     );
   }
+
+  @override
+  List<Object?> get props => [isDone, id, title, description];
 }
