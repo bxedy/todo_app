@@ -78,9 +78,6 @@ class _DoneTasksTabState extends State<DoneTasksTab> {
                             final task = widget.tasksController.tasks[index];
                             return TaskCard(
                               task: task,
-                              onChanged: (_) {
-                                widget.tasksController.updateTaskToDone(task);
-                              },
                               onDeleteTap: () async {
                                 await widget.tasksController
                                     .deleteTask(task.id);
