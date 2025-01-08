@@ -6,7 +6,6 @@ import 'package:todo_app/features/tasks/presentation/components/custom_bottom_na
 import 'package:todo_app/features/tasks/presentation/components/tabs/done_tasks/done_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/search_tasks/search_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/todo_tasks/todo_tasks_tab.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
 class TasksScreen extends StatefulWidget {
