@@ -11,7 +11,7 @@ class TasksController extends ChangeNotifier {
   bool isLoading = false;
   int selectedTabIndex = 0;
 
-  Future<void> loadTasks({required bool isDone, String? query}) async {
+  Future<void> loadTasks({bool? isDone, String? query}) async {
     isLoading = true;
     notifyListeners();
 
