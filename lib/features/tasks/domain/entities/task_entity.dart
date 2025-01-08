@@ -1,10 +1,10 @@
-class Task {
+class TaskEntity {
   final bool isDone;
   final String id;
   final String title;
   final String description;
 
-  Task({
+  TaskEntity({
     required this.id,
     required this.isDone,
     required this.title,
@@ -20,8 +20,8 @@ class Task {
     };
   }
 
-  factory Task.fromMap(Map<String, dynamic> map) {
-    return Task(
+  factory TaskEntity.fromMap(Map<String, dynamic> map) {
+    return TaskEntity(
       id: map['id'],
       isDone: map['isDone'] == 1,
       title: map['title'],
@@ -29,13 +29,13 @@ class Task {
     );
   }
   
-  Task copyWith({
+  TaskEntity copyWith({
     bool? isDone,
     String? id,
     String? title,
     String? description,
   }) {
-    return Task(
+    return TaskEntity(
       id: id ?? this.id,
       isDone: isDone ?? this.isDone,
       title: title ?? this.title,

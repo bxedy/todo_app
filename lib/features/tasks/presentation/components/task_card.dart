@@ -5,7 +5,7 @@ import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 import 'package:todo_app/features/tasks/presentation/components/custom_check_box.dart';
 
 class TaskCard extends StatelessWidget {
-  final Task task;
+  final TaskEntity task;
   final void Function(bool?)? onChanged;
   final Function()? onDeleteTap;
 

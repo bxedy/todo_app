@@ -4,10 +4,10 @@ import 'package:uuid/uuid.dart';
 
 abstract class TasksUsecase {
   Future<int> createTask(String title, String description);
-  Future<int> updateTaskToDone(Task task);
+  Future<int> updateTaskToDone(TaskEntity task);
   Future<int> deleteTask(String id);
   Future<int> deleteAllDoneTasks();
-  Future<List<Task>> getTasks({required bool isDone, String? query});
+  Future<List<TaskEntity>> getTasks({required bool isDone, String? query});
 }
 
 class TasksUsecaseImpl implements TasksUsecase {
@@ -21,10 +21,11 @@ class TasksUsecaseImpl implements TasksUsecase {
   }
 
   @override
-  Future<List<Task>> getTasks({bool? isDone, String? query}) async {
+  Future<List<TaskEntity>> getTasks({bool? isDone, String? query}) async {
     if (query?.isNotEmpty == true) {
       return _repository.searchTasksByTitle(query!);
     }
+    
     return isDone == true
         ? _repository.getTasksDone()
         : _repository.getTodoTasks();
@@ -33,7 +34,7 @@ class TasksUsecaseImpl implements TasksUsecase {
   @override
   Future<int> createTask(String title, String description) {
     return _repository.createOrUpdateTask(
-      Task(
+      TaskEntity(
         id: const Uuid().v4(),
         title: title,
         description: description,
@@ -43,7 +44,7 @@ class TasksUsecaseImpl implements TasksUsecase {
   }
 
   @override
-  Future<int> updateTaskToDone(Task task) {
+  Future<int> updateTaskToDone(TaskEntity task) {
     return _repository.createOrUpdateTask(task);
   }
 

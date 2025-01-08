@@ -7,7 +7,7 @@ class TasksController extends ChangeNotifier {
 
   TasksController(this._tasksUsecase);
 
-  List<Task> tasks = <Task>[];
+  List<TaskEntity> tasks = <TaskEntity>[];
   bool isLoading = false;
   int selectedTabIndex = 0;
 
@@ -24,7 +24,7 @@ class TasksController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateTaskToDone(Task task) async {
+  Future<void> updateTaskToDone(TaskEntity task) async {
     await _tasksUsecase.updateTaskToDone(task.copyWith(isDone: true));
     notifyListeners();
   }

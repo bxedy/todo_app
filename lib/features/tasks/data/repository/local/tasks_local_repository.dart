@@ -23,7 +23,7 @@ class TasksLocalRepository {
     );
   }
 
-  Future<int> createOrUpdateTask(Task task) async {
+  Future<int> createOrUpdateTask(TaskEntity task) async {
     final db = await _db;
 
     return await db.insert(
@@ -39,38 +39,40 @@ class TasksLocalRepository {
     return await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<List<Task>> getTasks() async {
+  Future<List<TaskEntity>> getTasks() async {
     final db = await _db;
 
-    final List<Map<String, dynamic>> maps = await db.query('tasks');
-    return maps.map((map) => Task.fromMap(map)).toList();
+    final maps = await db.query('tasks');
+
+    return maps.map((map) => TaskEntity.fromMap(map)).toList();
   }
 
-  Future<List<Task>> getTasksDone() async {
+  Future<List<TaskEntity>> getTasksDone() async {
     final db = await _db;
 
-    final List<Map<String, dynamic>> maps =
-        await db.query('tasks', where: 'isDone = ?', whereArgs: [1]);
-    return maps.map((map) => Task.fromMap(map)).toList();
+    final maps = await db.query('tasks', where: 'isDone = ?', whereArgs: [1]);
+
+    return maps.map((map) => TaskEntity.fromMap(map)).toList();
   }
 
-  Future<List<Task>> getTodoTasks() async {
+  Future<List<TaskEntity>> getTodoTasks() async {
     final db = await _db;
 
-    final List<Map<String, dynamic>> maps =
-        await db.query('tasks', where: 'isDone = ?', whereArgs: [0]);
-    return maps.map((map) => Task.fromMap(map)).toList();
+    final maps = await db.query('tasks', where: 'isDone = ?', whereArgs: [0]);
+
+    return maps.map((map) => TaskEntity.fromMap(map)).toList();
   }
 
-  Future<List<Task>> searchTasksByTitle(String searchText) async {
+  Future<List<TaskEntity>> searchTasksByTitle(String searchText) async {
     final db = await _db;
 
-    final List<Map<String, dynamic>> maps = await db.query(
+    final maps = await db.query(
       'tasks',
       where: 'title LIKE ?',
       whereArgs: ['%$searchText%'],
     );
-    return maps.map((map) => Task.fromMap(map)).toList();
+
+    return maps.map((map) => TaskEntity.fromMap(map)).toList();
   }
 
   Future<int> deleteAllDoneTasks() async {
