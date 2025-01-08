@@ -10,13 +10,18 @@ void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final tasksController = getIt<TasksController>();
+  State<MainApp> createState() => _MainAppState();
+}
 
+class _MainAppState extends State<MainApp> {
+  final tasksController = getIt<TasksController>();
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(

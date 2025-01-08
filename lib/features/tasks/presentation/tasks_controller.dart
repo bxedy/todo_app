@@ -39,6 +39,8 @@ class TasksController extends ChangeNotifier {
   }
 
   void updateTab(int index) {
+    if (index == selectedTabIndex) return;
+    
     _setTasksToEmpty();
     selectedTabIndex = index;
     notifyListeners();

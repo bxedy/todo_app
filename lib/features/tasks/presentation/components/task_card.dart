@@ -35,11 +35,6 @@ class _TaskCardState extends State<TaskCard> {
           widget.onDeleteTap!();
         }
       },
-      background: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
-      ),
       child: Material(
         borderRadius: BorderRadius.circular(16),
         color: AppColors.paleWhite,
