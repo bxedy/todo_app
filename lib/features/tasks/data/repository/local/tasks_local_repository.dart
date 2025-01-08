@@ -56,7 +56,6 @@ class TasksLocalRepository {
 
   Future<List<TaskEntity>> getTodoTasks() async {
     final db = await _db;
-
     final maps = await db.query('tasks', where: 'isDone = ?', whereArgs: [0]);
 
     return maps.map((map) => TaskEntity.fromMap(map)).toList();
@@ -67,8 +66,8 @@ class TasksLocalRepository {
 
     final maps = await db.query(
       'tasks',
-      where: 'title LIKE ?',
-      whereArgs: ['%$searchText%'],
+      where: searchText.isNotEmpty ? 'title LIKE ?' : null,
+      whereArgs: searchText.isNotEmpty ? ['%$searchText%'] : null,
     );
 
     return maps.map((map) => TaskEntity.fromMap(map)).toList();
