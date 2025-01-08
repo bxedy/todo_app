@@ -7,7 +7,7 @@ abstract class TasksUsecase {
   Future<void> updateTaskToDone(TaskEntity task);
   Future<void> deleteTask(String id);
   Future<void> deleteAllDoneTasks();
-  Future<List<TaskEntity>> getTasks({required bool isDone, String? query});
+  Future<List<TaskEntity>> getTasks({required bool? isDone, String? query});
 }
 
 class TasksUsecaseImpl implements TasksUsecase {
@@ -22,8 +22,8 @@ class TasksUsecaseImpl implements TasksUsecase {
 
   @override
   Future<List<TaskEntity>> getTasks({bool? isDone, String? query}) async {
-    if (query?.isNotEmpty == true) {
-      return _repository.searchTasksByTitle(query!);
+    if (query != null) {
+      return _repository.searchTasksByTitle(query);
     }
 
     return isDone == true

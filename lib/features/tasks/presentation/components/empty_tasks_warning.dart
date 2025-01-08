@@ -54,22 +54,22 @@ class _CreateTaskButton extends StatelessWidget {
             color: Colors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.add,
                 color: AppColors.blue,
                 size: 20,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Text(
                 'Create task',
-                style: TextStyle(
+                style: GoogleFonts.urbanist(
                   color: AppColors.blue,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
