@@ -17,6 +17,7 @@ class CustomSearchField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: GoogleFonts.urbanist(
         color: AppColors.slatePurple,
         fontWeight: FontWeight.w500,
@@ -58,6 +59,7 @@ class CustomSearchField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: const BorderSide(
+            width: 2,
             color: AppColors.blue,
           ),
         ),
