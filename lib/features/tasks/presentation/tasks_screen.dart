@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
+import 'package:todo_app/features/tasks/presentation/components/custom_bottom_navigation_bar.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/done_tasks/done_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/search_tasks/search_tasks_tab.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/todo_tasks/todo_tasks_tab.dart';
@@ -78,77 +79,9 @@ class _TasksScreenState extends State<TasksScreen> {
               const SizedBox(width: 26),
             ],
           ),
-          bottomNavigationBar: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  width: 2,
-                  color: AppColors.paleWhite,
-                ),
-              ),
-            ),
-            height: 100,
-            child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              currentIndex: widget.tasksController.selectedTabIndex,
-              selectedItemColor: AppColors.blue,
-              unselectedItemColor: AppColors.mutedAzure,
-              type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: GoogleFonts.urbanist(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-              unselectedLabelStyle: GoogleFonts.urbanist(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-              onTap: _onTabTapped,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.todo.toSvgPictureWidget(
-                      color: widget.tasksController.selectedTabIndex == 0
-                          ? AppColors.blue
-                          : AppColors.mutedAzure,
-                    ),
-                  ),
-                  label: 'Todo',
-                ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.plus.toSvgPictureWidget(
-                      color: AppColors.mutedAzure,
-                    ),
-                  ),
-                  label: 'Create',
-                ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.search.toSvgPictureWidget(
-                      color: widget.tasksController.selectedTabIndex == 2
-                          ? AppColors.blue
-                          : AppColors.mutedAzure,
-                    ),
-                  ),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.checked.toSvgPictureWidget(
-                      color: widget.tasksController.selectedTabIndex == 3
-                          ? AppColors.blue
-                          : AppColors.mutedAzure,
-                    ),
-                  ),
-                  label: 'Done',
-                ),
-              ],
-            ),
+          bottomNavigationBar: CustomBottomNavigationBar(
+            selectedTabIndex: widget.tasksController.selectedTabIndex,
+            onTabTapped: _onTabTapped,
           ),
         );
       },
