@@ -40,7 +40,7 @@ Este é um aplicativo de **Lista de Tarefas** (Todo App) desenvolvido com **Flut
 <ol>
   <li>Clone o repositório:
     <pre><code>git clone https://github.com/bxedy/todo_app/
-cd todo_app</code></pre>
+</code></pre>
   </li>
   <li>Instale as dependências:
     <pre><code>flutter pub get</code></pre>
