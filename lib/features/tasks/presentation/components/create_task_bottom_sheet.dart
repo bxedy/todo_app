@@ -4,14 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
 class CreateTaskBottomSheet extends StatefulWidget {
-  const CreateTaskBottomSheet(this.tasksController, {super.key});
+  const CreateTaskBottomSheet(
+    this.tasksController, {
+    required this.onTaskCreated,
+    super.key,
+  });
   final TasksController tasksController;
+  final Function onTaskCreated;
 
-  static void show(BuildContext context, TasksController tasksController) {
-    showModalBottomSheet(
+  static Future<void> show(
+    BuildContext context,
+    TasksController tasksController, {
+    required Function onTaskCreated,
+  }) {
+    return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) => CreateTaskBottomSheet(tasksController),
+      builder: (_) => CreateTaskBottomSheet(
+        tasksController,
+        onTaskCreated: onTaskCreated,
+      ),
     );
   }
 
@@ -23,11 +35,11 @@ class CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  void _createTask() {
-    widget.tasksController
+  Future<void> createTask() async {
+    await widget.tasksController
         .createTask(titleController.text, descriptionController.text);
 
-    Navigator.pop(context);
+    widget.onTaskCreated();
   }
 
   @override
@@ -93,7 +105,7 @@ class CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
                   duration: const Duration(milliseconds: 300),
                   child: TextButton(
                     onPressed:
-                        titleController.text.isNotEmpty ? _createTask : null,
+                        titleController.text.isNotEmpty ? createTask : null,
                     child: Text(
                       'Create',
                       style: GoogleFonts.urbanist(
