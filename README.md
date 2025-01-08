@@ -37,3 +37,20 @@ Este é um aplicativo de **Lista de Tarefas** (Todo App) desenvolvido com **Flut
 - **Mocktail**: Para testes unitários com mock de dependências
 - **ValueNotifier** e **ChangeNotifier**: Para gerenciamento de estado reativo
 
+<h3>Instalação</h3>
+<ol>
+  <li>Clone o repositório:
+    <pre><code>git clone https://github.com/bxedy/todo_app/
+cd todo_app</code></pre>
+  </li>
+  <li>Instale as dependências:
+    <pre><code>flutter pub get</code></pre>
+  </li>
+  <li>Rode a aplicação:
+    <pre><code>flutter run</code></pre>
+  </li>
+</ol>
+
+<h3>Executando os testes</h3>
+<p>Para executar os testes execute:</p>
+<pre><code>flutter test</code></pre>
