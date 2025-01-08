@@ -1,11 +1,12 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 
-class TasksRepository {
-  static final TasksRepository _instance = TasksRepository._internal();
-  factory TasksRepository() => _instance;
+class TasksLocalRepository {
+  static final TasksLocalRepository _instance =
+      TasksLocalRepository._internal();
+  factory TasksLocalRepository() => _instance;
 
-  TasksRepository._internal();
+  TasksLocalRepository._internal();
 
   Database? _database;
 
@@ -49,5 +50,42 @@ class TasksRepository {
 
     final List<Map<String, dynamic>> maps = await db.query('tasks');
     return maps.map((map) => Task.fromMap(map)).toList();
+  }
+
+  Future<List<Task>> getTasksDone() async {
+    final db = await _db;
+
+    final List<Map<String, dynamic>> maps =
+        await db.query('tasks', where: 'isDone = ?', whereArgs: [1]);
+    return maps.map((map) => Task.fromMap(map)).toList();
+  }
+
+  Future<List<Task>> getTodoTasks() async {
+    final db = await _db;
+
+    final List<Map<String, dynamic>> maps =
+        await db.query('tasks', where: 'isDone = ?', whereArgs: [0]);
+    return maps.map((map) => Task.fromMap(map)).toList();
+  }
+
+  Future<List<Task>> searchTasksByTitle(String searchText) async {
+    final db = await _db;
+
+    final List<Map<String, dynamic>> maps = await db.query(
+      'tasks',
+      where: 'title LIKE ?',
+      whereArgs: ['%$searchText%'],
+    );
+    return maps.map((map) => Task.fromMap(map)).toList();
+  }
+
+  Future<int> deleteAllDoneTasks() async {
+    final db = await _db;
+
+    return await db.delete(
+      'tasks',
+      where: 'isDone = ?',
+      whereArgs: [1],
+    );
   }
 }
