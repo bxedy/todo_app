@@ -23,20 +23,19 @@ class TasksLocalRepository {
     );
   }
 
-  Future<int> createOrUpdateTask(TaskEntity task) async {
+  Future<void> createOrUpdateTask(TaskEntity task) async {
     final db = await _db;
 
-    return await db.insert(
+    await db.insert(
       'tasks',
       task.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<int> deleteTask(String id) async {
+  Future<void> deleteTask(String id) async {
     final db = await _db;
-
-    return await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
+    await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<List<TaskEntity>> getTasks() async {
@@ -75,10 +74,10 @@ class TasksLocalRepository {
     return maps.map((map) => TaskEntity.fromMap(map)).toList();
   }
 
-  Future<int> deleteAllDoneTasks() async {
+  Future<void> deleteAllDoneTasks() async {
     final db = await _db;
 
-    return await db.delete(
+    await db.delete(
       'tasks',
       where: 'isDone = ?',
       whereArgs: [1],

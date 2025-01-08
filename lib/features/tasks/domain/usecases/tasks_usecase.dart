@@ -3,10 +3,10 @@ import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class TasksUsecase {
-  Future<int> createTask(String title, String description);
-  Future<int> updateTaskToDone(TaskEntity task);
-  Future<int> deleteTask(String id);
-  Future<int> deleteAllDoneTasks();
+  Future<void> createTask(String title, String description);
+  Future<void> updateTaskToDone(TaskEntity task);
+  Future<void> deleteTask(String id);
+  Future<void> deleteAllDoneTasks();
   Future<List<TaskEntity>> getTasks({required bool isDone, String? query});
 }
 
@@ -16,7 +16,7 @@ class TasksUsecaseImpl implements TasksUsecase {
   TasksUsecaseImpl(this._repository);
 
   @override
-  Future<int> deleteTask(String id) {
+  Future<void> deleteTask(String id) {
     return _repository.deleteTask(id);
   }
 
@@ -25,14 +25,14 @@ class TasksUsecaseImpl implements TasksUsecase {
     if (query?.isNotEmpty == true) {
       return _repository.searchTasksByTitle(query!);
     }
-    
+
     return isDone == true
         ? _repository.getTasksDone()
         : _repository.getTodoTasks();
   }
 
   @override
-  Future<int> createTask(String title, String description) {
+  Future<void> createTask(String title, String description) {
     return _repository.createOrUpdateTask(
       TaskEntity(
         id: const Uuid().v4(),
@@ -44,12 +44,12 @@ class TasksUsecaseImpl implements TasksUsecase {
   }
 
   @override
-  Future<int> updateTaskToDone(TaskEntity task) {
+  Future<void> updateTaskToDone(TaskEntity task) {
     return _repository.createOrUpdateTask(task);
   }
 
   @override
-  Future<int> deleteAllDoneTasks() {
+  Future<void> deleteAllDoneTasks() {
     return _repository.deleteAllDoneTasks();
   }
 }
