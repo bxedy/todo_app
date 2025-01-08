@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 
 class CustomSearchField extends StatelessWidget {
   final TextEditingController controller;
@@ -18,21 +19,13 @@ class CustomSearchField extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
-      style: GoogleFonts.urbanist(
-        color: AppColors.slatePurple,
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
-      ),
+      style: AppTypography.urbanist16W500(color: AppColors.slatePurple),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.zero,
         filled: true,
         fillColor: AppColors.paleWhite,
         hintText: 'Search...',
-        hintStyle: GoogleFonts.urbanist(
-          color: AppColors.mutedAzure,
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-        ),
+        hintStyle: AppTypography.urbanist16W500(color: AppColors.mutedAzure),
         prefixIcon: const Icon(
           Icons.search,
           color: AppColors.blue,
@@ -52,22 +45,23 @@ class CustomSearchField extends StatelessWidget {
             : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(
+          borderSide:  BorderSide(
+            width: 1.5,
             color: AppColors.blue,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(
-            width: 2,
-            color: AppColors.blue,
+          borderSide:  BorderSide(
+            width: 1.5,
+            color: AppColors.blue.withOpacity(.5),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(
-            color: AppColors.blue.withOpacity(.5),
-            width: 2,
+          borderSide:const BorderSide(
+            width: 1.5,
+            color: AppColors.blue,
           ),
         ),
       ),

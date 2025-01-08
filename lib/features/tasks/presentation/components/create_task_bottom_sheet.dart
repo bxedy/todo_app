@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
 class CreateTaskBottomSheet extends StatefulWidget {
@@ -55,11 +56,8 @@ class CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
               controller: titleController,
               decoration: InputDecoration(
                 hintText: 'What\'s on your mind?',
-                hintStyle: GoogleFonts.urbanist(
-                  color: AppColors.mutedAzure,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
+                hintStyle:
+                    AppTypography.urbanist16W500(color: AppColors.mutedAzure),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Container(
@@ -87,11 +85,8 @@ class CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
               minLines: 1,
               decoration: InputDecoration(
                 hintText: 'Add a note...',
-                hintStyle: GoogleFonts.urbanist(
-                  color: AppColors.mutedAzure,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
+                hintStyle:
+                    AppTypography.urbanist16W500(color: AppColors.mutedAzure),
                 prefixIcon: const Icon(
                   Icons.edit,
                   color: AppColors.mutedAzure,
@@ -114,11 +109,7 @@ class CreateTaskBottomSheetState extends State<CreateTaskBottomSheet> {
                       titleController.text.isNotEmpty ? createTask : null,
                   child: Text(
                     'Create',
-                    style: GoogleFonts.urbanist(
-                      color: AppColors.blue,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                    ),
+                    style: AppTypography.urbanist16W700(color: AppColors.blue),
                   ),
                 ),
               );

@@ -8,13 +8,9 @@ class TasksController extends ChangeNotifier {
   TasksController(this._tasksUsecase);
 
   List<TaskEntity> tasks = <TaskEntity>[];
-  bool isLoading = false;
   int selectedTabIndex = 0;
 
   Future<void> loadTasks({bool? isDone, String? query}) async {
-    isLoading = true;
-    notifyListeners();
-
     tasks = await _tasksUsecase.getTasks(isDone: isDone, query: query);
     notifyListeners();
   }

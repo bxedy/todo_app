@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 import 'package:todo_app/features/tasks/presentation/components/empty_tasks_warning.dart';
 import 'package:todo_app/features/tasks/presentation/components/task_card.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
@@ -39,11 +40,7 @@ class _DoneTasksTabState extends State<DoneTasksTab> {
                   children: [
                     Text(
                       'Completed Tasks',
-                      style: GoogleFonts.urbanist(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.slatePurple,
-                      ),
+                      style: AppTypography.urbanist20Bold(),
                     ),
                     Visibility(
                       visible: widget.tasksController.tasks.isNotEmpty,
@@ -54,11 +51,8 @@ class _DoneTasksTabState extends State<DoneTasksTab> {
                         },
                         child: Text(
                           'Delete all',
-                          style: GoogleFonts.urbanist(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.fireRed,
-                          ),
+                          style: AppTypography.urbanist18Bold(
+                              color: AppColors.fireRed),
                         ),
                       ),
                     ),

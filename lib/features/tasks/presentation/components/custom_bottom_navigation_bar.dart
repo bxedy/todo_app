@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final Function(int)? onTabTapped;
@@ -28,14 +29,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         selectedItemColor: AppColors.blue,
         unselectedItemColor: AppColors.mutedAzure,
         type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: GoogleFonts.urbanist(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-        unselectedLabelStyle: GoogleFonts.urbanist(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
+        selectedLabelStyle: AppTypography.urbanist14W600(),
+        unselectedLabelStyle: AppTypography.urbanist14W600(),
         onTap: onTabTapped,
         items: [
           _customBottomNavigationBarItem(

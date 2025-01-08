@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 
 class EmptyTasksWarning extends StatelessWidget {
   final Function()? onButtonTap;
@@ -21,11 +22,7 @@ class EmptyTasksWarning extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           onButtonTap != null ? 'You have no task listed.' : 'No result found.',
-          style: GoogleFonts.urbanist(
-            color: AppColors.slateBlue,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
+          style: AppTypography.urbanist16W500(color: AppColors.slateBlue),
         ),
         if (onButtonTap != null) ...[
           const SizedBox(height: 28),
@@ -66,11 +63,7 @@ class _CreateTaskButton extends StatelessWidget {
               const SizedBox(width: 12),
               Text(
                 'Create task',
-                style: GoogleFonts.urbanist(
-                  color: AppColors.blue,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: AppTypography.urbanist18W600(color: AppColors.blue),
               ),
             ],
           ),

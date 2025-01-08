@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
 import 'package:todo_app/features/tasks/presentation/components/custom_bottom_navigation_bar.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/done_tasks/done_tasks_tab.dart';
@@ -27,7 +28,7 @@ class _TasksScreenState extends State<TasksScreen> {
         widget.tasksController,
         onTaskCreated: () {
           Navigator.pop(context);
-          widget.tasksController.loadTasks(isDone: index != 1);
+          widget.tasksController.loadTasks(isDone: index == 3);
         },
       );
     } else {
@@ -66,10 +67,7 @@ class _TasksScreenState extends State<TasksScreen> {
             actions: [
               Text(
                 'John',
-                style: GoogleFonts.urbanist(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                ),
+                style: AppTypography.urbanist18W600(),
               ),
               const SizedBox(width: 14),
               Image.asset(

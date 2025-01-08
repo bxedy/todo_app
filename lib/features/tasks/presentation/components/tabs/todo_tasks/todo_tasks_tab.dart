@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/core/ui/app_typography.dart';
 import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
 import 'package:todo_app/features/tasks/presentation/components/empty_tasks_warning.dart';
 import 'package:todo_app/features/tasks/presentation/components/task_card.dart';
@@ -47,19 +48,12 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                 RichText(
                   text: TextSpan(
                     text: 'Welcome, ',
-                    style: GoogleFonts.urbanist(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.slatePurple,
-                    ),
+                    style: AppTypography.urbanist20Bold(),
                     children: [
                       TextSpan(
                         text: 'John',
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.blue,
-                        ),
+                        style:
+                            AppTypography.urbanist20Bold(color: AppColors.blue),
                       ),
                     ],
                   ),
@@ -67,11 +61,8 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                 const SizedBox(height: 10),
                 Text(
                   taskStatusMessage,
-                  style: GoogleFonts.urbanist(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: AppColors.slateBlue,
-                  ),
+                  style:
+                      AppTypography.urbanist16W500(color: AppColors.slateBlue),
                 ),
                 const SizedBox(height: 32),
                 Expanded(
