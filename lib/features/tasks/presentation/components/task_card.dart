@@ -40,11 +40,12 @@ class _TaskCardState extends State<TaskCard> {
         color: AppColors.paleWhite,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: widget.task.isDone != true
-              ? () {
-                  isExpanded.value = !isExpanded.value;
-                }
-              : null,
+          onTap:
+              widget.task.isDone != true && widget.task.description.isNotEmpty
+                  ? () {
+                      isExpanded.value = !isExpanded.value;
+                    }
+                  : null,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ValueListenableBuilder(
@@ -65,21 +66,17 @@ class _TaskCardState extends State<TaskCard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                widget.task.title,
-                                style: AppTypography.urbanist16W600(
-                                  color: widget.task.isDone
-                                      ? AppColors.slateBlue
-                                      : AppColors.slatePurple,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            widget.task.title,
+                            style: AppTypography.urbanist16W600(
+                              color: widget.task.isDone
+                                  ? AppColors.slateBlue
+                                  : AppColors.slatePurple,
+                            ),
                           ),
                           if (widget.task.description.isNotEmpty) ...[
                             AnimatedCrossFade(
-                              firstChild: const SizedBox(),
+                              firstChild: const SizedBox(width: double.infinity),
                               secondChild: Column(
                                 children: [
                                   const SizedBox(height: 12),
@@ -99,7 +96,8 @@ class _TaskCardState extends State<TaskCard> {
                         ],
                       ),
                     ),
-                    if (widget.onDeleteTap != null)
+                    if (widget.onDeleteTap != null) ...[
+                      const SizedBox(width: 16),
                       InkWell(
                         onTap: widget.onDeleteTap,
                         child: const Icon(
@@ -107,13 +105,15 @@ class _TaskCardState extends State<TaskCard> {
                           color: AppColors.fireRed,
                         ),
                       )
-                    else if (widget.task.isDone == false &&
+                    ] else if (widget.task.isDone == false &&
                         widget.task.description.isNotEmpty &&
-                        isExpanded.value == false)
+                        isExpanded.value == false) ...[
+                      const SizedBox(width: 16),
                       const Icon(
                         Icons.more_horiz,
                         color: AppColors.mutedAzure,
                       ),
+                    ],
                   ],
                 );
               },
