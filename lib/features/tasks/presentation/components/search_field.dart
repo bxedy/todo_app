@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 
-class CustomSearchField extends StatefulWidget {
-  const CustomSearchField({super.key});
+class CustomSearchField extends StatelessWidget {
+  final TextEditingController controller;
+  final Function(String) onChanged;
 
-  @override
-  State<CustomSearchField> createState() => _CustomSearchFieldState();
-}
-
-class _CustomSearchFieldState extends State<CustomSearchField> {
-  final TextEditingController _controller = TextEditingController();
+  const CustomSearchField({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller,
-      onChanged: (value) {
-        setState(() {});
-      },
+      controller: controller,
+      onChanged: onChanged,
       style: GoogleFonts.urbanist(
         color: AppColors.slatePurple,
         fontWeight: FontWeight.w500,
@@ -38,7 +36,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           Icons.search,
           color: AppColors.blue,
         ),
-        suffixIcon: _controller.text.isNotEmpty
+        suffixIcon: controller.text.isNotEmpty
             ? IconButton(
                 icon: const Icon(
                   Icons.cancel,
@@ -46,8 +44,8 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
                   size: 16,
                 ),
                 onPressed: () {
-                  _controller.clear();
-                  setState(() {});
+                  controller.clear();
+                  onChanged('');
                 },
               )
             : null,

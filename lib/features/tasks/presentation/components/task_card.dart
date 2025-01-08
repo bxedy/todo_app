@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
+import 'package:todo_app/features/tasks/presentation/components/custom_check_box.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
   final void Function(bool?)? onChanged;
+  final Function()? onDeleteTap;
 
-  const TaskCard({super.key, required this.task, required this.onChanged});
+  const TaskCard({
+    super.key,
+    required this.task,
+    this.onChanged,
+    this.onDeleteTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +29,9 @@ class TaskCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: SizedBox(
-                width: 24,
-                height: 24,
-                child: Checkbox(
-                  side: const BorderSide(
-                    color: AppColors.mutedAzure,
-                    width: 2,
-                  ),
-                  activeColor: AppColors.blue,
-                  value: task.isDone,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  onChanged: onChanged,
-                ),
-              ),
+            CustomCheckbox(
+              value: task.isDone,
+              onChanged: onChanged,
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -68,7 +61,15 @@ class TaskCard extends StatelessWidget {
                   ]
                 ],
               ),
-            )
+            ),
+            if (onDeleteTap != null)
+              InkWell(
+                onTap: onDeleteTap,
+                child: const Icon(
+                  Icons.delete,
+                  color: AppColors.fireRed,
+                ),
+              )
           ],
         ),
       ),

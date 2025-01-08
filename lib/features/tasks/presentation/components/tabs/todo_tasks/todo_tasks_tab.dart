@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
+import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
 import 'package:todo_app/features/tasks/presentation/components/empty_tasks_warning.dart';
 import 'package:todo_app/features/tasks/presentation/components/task_card.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
@@ -78,7 +79,14 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                   child: widget.tasksController.tasks.isEmpty
                       ? Center(
                           child: EmptyTasksWarning(
-                            onButtonTap: () {},
+                            onButtonTap: () async {
+                              await CreateTaskBottomSheet.show(
+                                  context, widget.tasksController,
+                                  onTaskCreated: () {
+                                Navigator.pop(context);
+                                widget.tasksController.loadTasks(isDone: false);
+                              });
+                            },
                           ),
                         )
                       : ListView.separated(
@@ -87,9 +95,11 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                           itemBuilder: (context, index) {
                             final task = widget.tasksController.tasks[index];
                             return TaskCard(
-                              task: task.copyWith(isDone: true),
-                              onChanged: (_) {
-                                widget.tasksController.toggleIsDone(task);
+                              task: task,
+                              onChanged: (_) async {
+                                await widget.tasksController
+                                    .updateTaskToDone(task);
+                                widget.tasksController.loadTasks(isDone: false);
                               },
                             );
                           },
