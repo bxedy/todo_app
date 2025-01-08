@@ -29,43 +29,53 @@ class EmptyTasksWarning extends StatelessWidget {
         ),
         if (onButtonTap != null) ...[
           const SizedBox(height: 28),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onButtonTap,
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: AppColors.blue,
-                      size: 20,
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      'Create task',
-                      style: TextStyle(
-                        color: AppColors.blue,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          _CreateTaskButton(onButtonTap: onButtonTap),
         ]
       ],
+    );
+  }
+}
+
+class _CreateTaskButton extends StatelessWidget {
+  const _CreateTaskButton({required this.onButtonTap});
+
+  final Function()? onButtonTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onButtonTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.blue.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.add,
+                color: AppColors.blue,
+                size: 20,
+              ),
+              SizedBox(width: 12),
+              Text(
+                'Create task',
+                style: TextStyle(
+                  color: AppColors.blue,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
