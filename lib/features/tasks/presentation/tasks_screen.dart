@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/ui/app_assets.dart';
-import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/features/tasks/presentation/components/create_task_bottom_sheet.dart';
 import 'package:todo_app/features/tasks/presentation/components/custom_bottom_navigation_bar.dart';
 import 'package:todo_app/features/tasks/presentation/components/tabs/done_tasks/done_tasks_tab.dart';
@@ -23,11 +22,14 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _onTabTapped(int index) {
     if (index == 1) {
-      CreateTaskBottomSheet.show(context, widget.tasksController,
-          onTaskCreated: () {
-        Navigator.pop(context);
-        widget.tasksController.loadTasks(isDone: index != 1);
-      });
+      CreateTaskBottomSheet.show(
+        context,
+        widget.tasksController,
+        onTaskCreated: () {
+          Navigator.pop(context);
+          widget.tasksController.loadTasks(isDone: index != 1);
+        },
+      );
     } else {
       widget.tasksController.updateTab(index);
     }
