@@ -23,7 +23,7 @@ Este é um aplicativo de **Lista de Tarefas** (Todo App) desenvolvido com **Flut
 - **Animações**:
   - O app conta com animações suaves.
 
-- **Algumas detalhes nas interações**:
+- **Alguns detalhes nas interações**:
   - **Desabilitação do botão "Criar Tarefa"** até que o título seja preenchido.
   - **Desfocar a barra de pesquisa** quando o usuário clicar fora dela.
   - **Exclusão de Tarefas**: Implementada a funcionalidade de excluir tarefas arrastando o item (swipe).
