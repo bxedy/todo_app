@@ -6,7 +6,7 @@ import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 
 final getIt = GetIt.instance;
 
-void setupDependencies() async {
+Future<void> setupDependencies() async {
   final database = await _initDatabase();
 
   // Repositories
@@ -21,7 +21,7 @@ void setupDependencies() async {
 }
 
 Future<Database> _initDatabase() async {
-  return openDatabase(
+  return await openDatabase(
     'tasks_database.db',
     version: 2,
     onCreate: (db, version) async {

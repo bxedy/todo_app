@@ -4,8 +4,10 @@ import 'package:todo_app/di.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_controller.dart';
 import 'package:todo_app/features/tasks/presentation/tasks_screen.dart';
 
-void main() {
-  setupDependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await setupDependencies();
 
   runApp(const MainApp());
 }
