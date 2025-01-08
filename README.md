@@ -54,3 +54,8 @@ cd todo_app</code></pre>
 <h3>Executando os testes</h3>
 <p>Para executar os testes execute:</p>
 <pre><code>flutter test</code></pre>
+
+<h2>Videos</h2>
+|<img src="https://github.com/user-attachments/assets/acd36676-7362-4926-bfbc-dbf6440274dd" width="40%">|<img src="https://github.com/user-attachments/assets/ef34500b-717a-4ca9-bb08-13a1bb5edcad" width="40%">|
+
+</html>
