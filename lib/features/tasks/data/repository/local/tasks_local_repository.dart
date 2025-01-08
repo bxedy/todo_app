@@ -2,12 +2,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
 
 class TasksLocalRepository {
-  static final TasksLocalRepository _instance =
-      TasksLocalRepository._internal();
-  factory TasksLocalRepository() => _instance;
-
-  TasksLocalRepository._internal();
-
   Database? _database;
 
   Future<Database> get _db async {
