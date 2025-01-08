@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/core/ui/app_colors.dart';
 import 'package:todo_app/core/ui/app_typography.dart';
 import 'package:todo_app/features/tasks/domain/entities/task_entity.dart';
@@ -26,19 +25,34 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(16),
-      color: AppColors.paleWhite,
-      child: InkWell(
+    return Dismissible(
+      key: ValueKey(widget.task.id),
+      direction: widget.onDeleteTap != null
+          ? DismissDirection.startToEnd
+          : DismissDirection.none,
+      onDismissed: (direction) {
+        if (widget.onDeleteTap != null) {
+          widget.onDeleteTap!();
+        }
+      },
+      background: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+      ),
+      child: Material(
         borderRadius: BorderRadius.circular(16),
-        onTap: widget.task.isDone != true
-            ? () {
-                isExpanded.value = !isExpanded.value;
-              }
-            : null,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: ValueListenableBuilder(
+        color: AppColors.paleWhite,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: widget.task.isDone != true
+              ? () {
+                  isExpanded.value = !isExpanded.value;
+                }
+              : null,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ValueListenableBuilder(
               valueListenable: isExpanded,
               builder: (context, __, _) {
                 return Row(
@@ -107,7 +121,9 @@ class _TaskCardState extends State<TaskCard> {
                       ),
                   ],
                 );
-              }),
+              },
+            ),
+          ),
         ),
       ),
     );
