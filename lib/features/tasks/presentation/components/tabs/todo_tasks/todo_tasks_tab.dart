@@ -79,14 +79,8 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                   child: widget.tasksController.tasks.isEmpty
                       ? Center(
                           child: EmptyTasksWarning(
-                            onButtonTap: () async {
-                              await CreateTaskBottomSheet.show(
-                                  context, widget.tasksController,
-                                  onTaskCreated: () {
-                                Navigator.pop(context);
-                                widget.tasksController.loadTasks(isDone: false);
-                              });
-                            },
+                            onButtonTap: () =>
+                                _showCreateTaskBottomSheet(context),
                           ),
                         )
                       : ListView.separated(
@@ -99,6 +93,7 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
                               onChanged: (_) async {
                                 await widget.tasksController
                                     .updateTaskToDone(task);
+
                                 widget.tasksController.loadTasks(isDone: false);
                               },
                             );
@@ -112,5 +107,16 @@ class _TodoTasksTabState extends State<TodoTasksTab> {
             ),
           );
         });
+  }
+
+  void _showCreateTaskBottomSheet(BuildContext context) async {
+    CreateTaskBottomSheet.show(
+      context,
+      widget.tasksController,
+      onTaskCreated: () {
+        Navigator.pop(context);
+        widget.tasksController.loadTasks(isDone: false);
+      },
+    );
   }
 }
