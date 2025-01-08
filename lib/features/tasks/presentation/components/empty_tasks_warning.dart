@@ -17,7 +17,7 @@ class EmptyTasksWarning extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AppAssets.emptyStateIllustration
-            .svgPictureFromPath(height: 82, width: 80),
+            .toSvgPictureWidget(height: 82, width: 80),
         const SizedBox(height: 24),
         Text(
           onButtonTap != null ? 'You have no task listed.' : 'No result found.',

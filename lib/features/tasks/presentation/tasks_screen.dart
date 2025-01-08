@@ -57,7 +57,7 @@ class _TasksScreenState extends State<TasksScreen> {
             leading: Row(
               children: [
                 const SizedBox(width: 26),
-                AppAssets.logo.svgPictureFromPath(size: 28),
+                AppAssets.logo.toSvgPictureWidget(size: 28),
               ],
             ),
             actions: [
@@ -108,7 +108,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.todo.svgPictureFromPath(
+                    child: AppAssets.todo.toSvgPictureWidget(
                       color: widget.tasksController.selectedTabIndex == 0
                           ? AppColors.blue
                           : AppColors.mutedAzure,
@@ -119,7 +119,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.plus.svgPictureFromPath(
+                    child: AppAssets.plus.toSvgPictureWidget(
                       color: AppColors.mutedAzure,
                     ),
                   ),
@@ -128,7 +128,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.search.svgPictureFromPath(
+                    child: AppAssets.search.toSvgPictureWidget(
                       color: widget.tasksController.selectedTabIndex == 2
                           ? AppColors.blue
                           : AppColors.mutedAzure,
@@ -139,7 +139,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: AppAssets.checked.svgPictureFromPath(
+                    child: AppAssets.checked.toSvgPictureWidget(
                       color: widget.tasksController.selectedTabIndex == 3
                           ? AppColors.blue
                           : AppColors.mutedAzure,

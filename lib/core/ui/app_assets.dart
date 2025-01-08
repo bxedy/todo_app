@@ -22,7 +22,7 @@ class AppAssets {
 }
 
 extension AppAssetExt on String {
-  AppAsset svgPictureFromPath({
+  AppAsset toSvgPictureWidget({
     String? icon,
     double? size,
     BoxFit? fit,
